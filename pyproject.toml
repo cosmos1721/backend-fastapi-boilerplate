@@ -1,0 +1,11 @@
+[tool.black]
+line-length = 88
+target-version = ['py38']
+skip-string-normalization = true
+
+
+[tool.isort]
+profile = "black"
+known_first_party = ["utils", "models", "db", "ai_models", "background_tasks", "routers"]
+known_third_party = ["fastapi", "python_dotenv", "sentry_sdk", "python_jose", "motor", "aiobotocore", "boto3", "requests", "sqlalchemy", "pytz", "loguru", "passlib", "aiohttp", "uvicorn", "fastapi_utils", "pymysql", "dictalchemy3"]  # List third-party packages
+sections = ["STDLIB", "THIRDPARTY", "FIRSTPARTY"]

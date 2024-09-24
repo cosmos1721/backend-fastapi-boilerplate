@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Notification Test</title>
+</head>
+<body>
+    <h1>Server-Sent Events (SSE) Test</h1>
+    
+    <button id="connectBtn">Connect to SSE</button>
+    
+    <h2>Received Messages</h2>
+    <div id="output"></div>
+
+    <script>
+        let eventSource;
+
+        document.getElementById('connectBtn').addEventListener('click', function () {
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhaWNhZGVzPUFJU2VydmVyIn0.CExlDZ3TYVhEfGvde7bt1gTkk4qIKnI9FIvYwhq3VbI";
+            const user_id = '8736870873';
+            // Connect to SSE endpoint with token as a query parameter
+            eventSource = new EventSource(`http://localhost:8000/backend/events?user_id=${encodeURIComponent(user_id)}`);
+            
+            eventSource.onmessage = function(event) {
+                const output = document.getElementById('output');
+                const newElement = document.createElement('p');
+                newElement.textContent = "Received: " + event.data;
+                output.appendChild(newElement);
+            };
+
+            eventSource.onerror = function() {
+                console.error("SSE connection failed. Trying to reconnect...");
+            };
+
+            eventSource.onopen = function() {
+                console.log("SSE connection established.");
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+import unittest
+from passlib.context import CryptContext
+
+# Assuming the functions are defined in the same module or imported from another module.
+# Also assuming the `password_context` is defined somewhere globally or passed as a dependency.
+
+# Setting up the CryptContext (this is a sample, adapt as needed)
+password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def get_hashed_password(password: str) -> str:
+    return password_context.hash(password)
+
+def verify_password(password: str, hashed_pass: str) -> bool:
+    return password_context.verify(password, hashed_pass)
+
+class TestPasswordFunctions(unittest.TestCase):
+    
+    def setUp(self):
+        # This will be executed before each test case.
+        self.password = "securepassword123"
+        self.wrong_password = "wrongpassword"
+        self.hashed_password = get_hashed_password(self.password)
+
+    def test_get_hashed_password(self):
+        # Testing if the hashed password is different from the plain password.
+        self.assertNotEqual(self.password, self.hashed_password)
+        # Ensuring the hashed password is not None or empty.
+        self.assertIsNotNone(self.hashed_password)
+        self.assertNotEqual(self.hashed_password, "")
+
+    def test_verify_password_correct(self):
+        # Testing if the correct password matches the hash.
+        self.assertTrue(verify_password(self.password, self.hashed_password))
+
+    def test_verify_password_incorrect(self):
+        # Testing if an incorrect password does not match the hash.
+        self.assertFalse(verify_password(self.wrong_password, self.hashed_password))
+
+if __name__ == "__main__":
+    unittest.main()

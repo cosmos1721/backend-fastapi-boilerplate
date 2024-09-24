@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = {extras = ["all"], version = "==0.111.0"}
+python-dotenv = "1.0.1"
+sentry-sdk = "2.9.0"
+python-jose = "3.3.0"
+motor = {extras = ["srv"], version = "==3.5.1"}
+aiobotocore = "2.13.1"
+boto3 = "1.34.131"
+requests = "2.32.3"
+sqlalchemy = "2.0.31"
+pytz = "2024.1"
+loguru = "0.7.2"
+passlib = "1.7.4"
+aiohttp = "3.9.5"
+uvicorn = {extras = ["standard"], version = "==0.30.1"}
+fastapi-utils = "0.7.0"
+pymysql = "1.1.1"
+dictalchemy3 = "1.0.0"
+aiofiles = "24.1.0"
+sib_api_v3_sdk = "7.6.0"
+
+[dev-packages]
+flake8 = "7.1.1"
+black = "24.8.0"
+isort = "5.13.2"
+
+[requires]
+python_version = "3.8"
